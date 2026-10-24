@@ -1,0 +1,16 @@
+:root { color-scheme: dark; }
+body { margin: 0; background: #0A0A0A; color: #F2F2EE; font: 17px/1.55 "Helvetica Neue", Arial, sans-serif; }
+main { max-width: 680px; margin: 0 auto; padding: 40px 16px 80px; }
+.home { display: inline-block; margin-bottom: 28px; font: 700 13px Menlo, monospace; letter-spacing: 0.12em; color: #F2F2EE; text-decoration: none; }
+h1 { font: 900 44px/1 "Arial Black", "Helvetica Neue", sans-serif; letter-spacing: -0.03em; margin: 0 0 8px; text-transform: uppercase; }
+h2 { font: 800 19px/1.2 "Helvetica Neue", Arial, sans-serif; margin: 36px 0 8px; text-transform: uppercase; letter-spacing: 0.02em; }
+p, li { color: #DADAD4; }
+.meta { font: 13px/1.4 Menlo, monospace; color: #8A8A85; text-transform: uppercase; letter-spacing: 0.08em; }
+.bar { display: grid; grid-template-columns: repeat(4, 1fr); height: 8px; margin: 20px 0 8px; }
+.bar i:nth-child(1) { background: #D4FF00; } .bar i:nth-child(2) { background: #3D7BFF; }
+.bar i:nth-child(3) { background: #FF6A1A; } .bar i:nth-child(4) { background: #FF3EA5; }
+a { color: #D4FF00; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid #2A2A28; }
+th { font: 12px Menlo, monospace; text-transform: uppercase; letter-spacing: 0.08em; color: #8A8A85; }
+.links { display: flex; gap: 20px; flex-wrap: wrap; font: 700 13px Menlo, monospace; letter-spacing: 0.08em; text-transform: uppercase; }
