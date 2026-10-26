@@ -3,17 +3,201 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAUVE NYC</title>
-<link rel="stylesheet" href="/style.css">
+<title>FAUVE NYC · Tonight in New York</title>
+<meta name="description" content="FAUVE finds what's on tonight in New York across house and techno, jazz, natural wine and art, then builds your route and shares it with your crew.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Space+Mono:wght@400;700&family=Unbounded:wght@800;900&display=swap">
+<link rel="stylesheet" href="/site.css">
+<script defer src="/data.js"></script>
+<script defer src="/site.js"></script>
 </head>
 <body>
-<main>
-  <h1>FAUVE NYC</h1>
-  <div class="meta">House · Jazz · Natty wine · Art</div>
-  <div class="bar"><i></i><i></i><i></i><i></i></div>
-  <p>What’s on tonight in Brooklyn and New York, color-coded by scene. Build a route around your mood and plan the night with friends. For iPhone.</p>
-  <p class="links"><a href="https://apps.apple.com/app/id6825388764">App Store</a><a href="/support">Support</a><a href="/privacy">Privacy</a></p>
-  <p class="meta">© 2026 Alexandre Gourdol</p>
+<a class="skip" href="#explore">Skip to Tonight</a>
+
+<!-- Opening: the app's intro, direction A "Hatch". Click to skip; plays once per visit. -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bars"><i></i><i></i><i></i><i></i></div>
+  <div class="intro-lime hatch">
+    <div class="intro-tag">HOUSE · JAZZ · NATTY WINE · ART</div>
+    <div class="intro-mask"><div class="intro-word">FAUVE</div></div>
+  </div>
+</div>
+
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top" aria-label="FAUVE NYC, back to top">FAUVE</a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#explore" data-section="explore">TONIGHT</a>
+    <a href="#explore" data-section="explore" data-mode="map">MAP</a>
+    <a href="#plan" data-section="plan">PLAN</a>
+    <a href="#crew" data-section="crew">CREW</a>
+  </nav>
+  <a class="btn btn-accent nav-cta" href="https://apps.apple.com/app/id6825388764" data-magnetic>GET FAUVE <span aria-hidden="true">↗</span></a>
+  <button class="nav-menu" id="navMenu" aria-expanded="false" aria-controls="navSheet">MENU</button>
+</header>
+<div class="nav-sheet" id="navSheet" hidden>
+  <a href="#explore">TONIGHT</a><a href="#explore" data-mode="map">MAP</a><a href="#plan">PLAN</a><a href="#crew">CREW</a>
+  <a class="btn btn-accent" href="https://apps.apple.com/app/id6825388764">GET FAUVE ↗</a>
+</div>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-copy">
+      <p class="eyebrow" id="heroEyebrow">NEW YORK · TONIGHT · LIVE</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="line"><span>FIND YOUR</span></span>
+        <span class="line"><span class="swap" id="heroSwap" aria-live="off">HOUSE/TECHNO</span></span>
+        <span class="line"><span>TONIGHT.</span></span>
+      </h1>
+      <p class="hero-sentence">FAUVE finds what’s on tonight in New York, then builds your route and shares it with your crew.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-accent btn-lg" href="https://apps.apple.com/app/id6825388764" data-magnetic>GET FAUVE <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-line btn-lg" href="#explore">SEE TONIGHT <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero-stats mono" id="heroStats"></p>
+    </div>
+
+    <div class="hero-stage" id="heroStage">
+      <div class="float float-pin" data-depth="28" aria-hidden="true"></div>
+      <div class="phone" data-depth="10">
+        <div class="phone-screen" id="phoneScreen" aria-label="Preview of the FAUVE app's Tonight screen" role="img">
+          <div class="ph-head">
+            <div class="ph-eyebrow" id="phEyebrow"></div>
+            <div class="ph-title">TONIGHT</div>
+          </div>
+          <div class="ph-chips" id="phChips"></div>
+          <div class="ph-feed"><div class="ph-feed-inner" id="phFeed"></div></div>
+          <div class="ph-tabs"><span class="on">TONIGHT</span><span>MAP</span><span>PLAN</span><span>SCENE</span><span>ME</span></div>
+        </div>
+      </div>
+      <div class="float float-route" data-depth="40" aria-hidden="true"></div>
+      <div class="float float-crew" data-depth="18" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+  <!-- EXPLORE -->
+  <section class="explore" id="explore" aria-labelledby="exploreTitle">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">01</span> EXPLORE</p>
+      <h2 class="section-title reveal" id="exploreTitle">TONIGHT, ON ONE MAP.</h2>
+      <p class="section-sub">Every listing is checked on the venue’s own page. Pick a scene, pick a night.</p>
+    </div>
+
+    <div class="explore-bar">
+      <div class="modes" role="tablist" aria-label="Browse" id="modes">
+        <button role="tab" data-mode="tonight" aria-selected="true">TONIGHT</button>
+        <button role="tab" data-mode="map" aria-selected="false">MAP</button>
+        <button role="tab" data-mode="picks" aria-selected="false">PICKS</button>
+        <button role="tab" data-mode="events" aria-selected="false">EVENTS</button>
+        <button role="tab" data-mode="places" aria-selected="false">PLACES</button>
+      </div>
+      <div class="chips" id="sceneChips" role="group" aria-label="Scene"></div>
+    </div>
+    <div class="days" id="days" role="group" aria-label="Night"></div>
+
+    <div class="explore-grid" id="exploreGrid">
+      <div class="map-wrap">
+        <div class="map" id="exploreMap" role="application" aria-label="Map of tonight's listings. Drag to move, use the buttons to zoom."></div>
+        <div class="map-ctrl">
+          <button class="sq" data-zoom="1.4" aria-label="Zoom in">+</button>
+          <button class="sq" data-zoom="0.7" aria-label="Zoom out">−</button>
+          <button class="sq" data-reset aria-label="Back to the whole map">⌖</button>
+        </div>
+        <div class="map-count mono" id="mapCount"></div>
+      </div>
+      <div class="list-wrap">
+        <p class="list-head mono" id="listHead"></p>
+        <div class="list" id="list" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="plan" id="plan" aria-labelledby="planTitle">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">02</span> PLAN</p>
+      <h2 class="section-title reveal" id="planTitle">TELL US YOUR MOOD.<br>WE’LL HANDLE THE REST.</h2>
+    </div>
+    <div class="plan-grid">
+      <form class="plan-form" id="planForm" aria-label="Build a route">
+        <fieldset><legend>STARTING FROM</legend><div class="chips" id="planFrom"></div></fieldset>
+        <fieldset><legend>START</legend><div class="chips" id="planStart"></div></fieldset>
+        <fieldset><legend>INTERESTS</legend><div class="chips" id="planInterests"></div></fieldset>
+        <fieldset><legend>PACE</legend><div class="chips" id="planPace"></div></fieldset>
+        <button class="btn btn-accent btn-lg btn-block" type="submit" data-magnetic>BUILD MY ROUTE →</button>
+        <p class="fine">A preview built from FAUVE’s listings and verified opening hours. In the app, PLAN also weighs budget, group and mood.</p>
+      </form>
+      <div class="plan-out">
+        <div class="map map-plan" id="planMap" role="img" aria-label="Map of the route"></div>
+        <ol class="route" id="route" aria-live="polite"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW -->
+  <section class="crew" id="crew" aria-labelledby="crewTitle">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">03</span> CREW</p>
+      <h2 class="section-title reveal" id="crewTitle">ONE PLAN.<br>THE WHOLE CREW.</h2>
+      <p class="section-sub">Turn any route into a private night plan. Invite friends in the app, or send the link in one message.</p>
+    </div>
+    <div class="crew-stage" id="crewStage">
+      <ol class="crew-steps" id="crewSteps">
+        <li data-step="0"><span class="mono">01</span><b>START A CREW</b><span>From any route in Plan.</span></li>
+        <li data-step="1"><span class="mono">02</span><b>ADD MEMBERS</b><span>Pick people you follow. They get an invitation in the app.</span></li>
+        <li data-step="2"><span class="mono">03</span><b>THEY ACCEPT</b><span>Everyone sees the same plan, live.</span></li>
+        <li data-step="3"><span class="mono">04</span><b>OR SHARE THE LINK</b><span>One message, any app. Only people with the code can join.</span></li>
+      </ol>
+      <div class="crew-cards" id="crewCards">
+        <article class="ccard ccard-plan" aria-label="Crew plan">
+          <p class="mono muted">PRIVATE CREW · <span id="crewDate"></span></p>
+          <h3>YOUR NIGHT PLAN</h3>
+          <p class="small">A private plan for you and your friends. Only the people in the crew see it.</p>
+          <div class="crew-members" id="crewMembers"></div>
+          <ol class="crew-stops" id="crewStops"></ol>
+        </article>
+        <article class="ccard ccard-invite" aria-label="Invite to crew">
+          <p class="mono muted">ADD MEMBERS</p>
+          <h3>INVITE TO CREW</h3>
+          <ul class="invite-rows" id="inviteRows"></ul>
+          <div class="btn btn-accent btn-block" aria-hidden="true">INVITE · 3</div>
+        </article>
+        <article class="ccard ccard-share" aria-label="Shared invite message">
+          <p class="mono muted">SHARE INVITE LINK</p>
+          <pre class="share-msg" id="shareMsg"></pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET FAUVE -->
+  <section class="get hatch" id="get" aria-labelledby="getTitle">
+    <p class="get-tag">HOUSE · JAZZ · NATTY WINE · ART</p>
+    <h2 class="get-word" id="getTitle" aria-label="FAUVE">
+      <span>F</span><span>A</span><span>U</span><span>V</span><span>E</span>
+    </h2>
+    <div class="get-row">
+      <p class="get-line">FROM THE FIRST STOP TO THE LAST SET. FREE ON IPHONE.</p>
+      <a class="btn btn-ink btn-lg" href="https://apps.apple.com/app/id6825388764" data-magnetic>DOWNLOAD THE APP <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 </main>
+
+<footer class="foot">
+  <div class="foot-bar"><i></i><i></i><i></i><i></i></div>
+  <div class="foot-row">
+    <span class="foot-logo">FAUVE NYC</span>
+    <nav aria-label="Footer"><a href="/support">SUPPORT</a><a href="/privacy">PRIVACY</a><a href="mailto:hello@fauve.nyc">HELLO@FAUVE.NYC</a></nav>
+    <span class="mono muted" id="footData"></span>
+    <span class="mono muted">© 2026 ALEXANDRE GOURDOL</span>
+  </div>
+</footer>
+<noscript><p class="noscript">FAUVE NYC shows what’s on tonight in New York. Turn on JavaScript to browse tonight’s listings, or <a href="https://apps.apple.com/app/id6825388764">get the app</a>.</p></noscript>
 </body>
 </html>
